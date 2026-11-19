@@ -119,8 +119,8 @@
     $('resultados').hidden = false;
     $('vitrine').hidden = true;
     $('imoveis').hidden = true;
-    $('resultsTitle').textContent = lista.length === 1 ? '1 imóvel encontrado'
-      : lista.length + ' imóveis encontrados';
+    $('resultsTitle').textContent = lista.length === 0 ? 'Nenhum imóvel encontrado'
+      : lista.length === 1 ? '1 imóvel encontrado' : lista.length + ' imóveis encontrados';
     $('resultsSummary').textContent = cod ? 'Código "' + cod.toUpperCase() + '"' : resumo();
     $('resultsGrid').innerHTML = lista.map(function (i) { return UI.cartao(i); }).join('');
     $('resultsEmpty').hidden = lista.length > 0;
@@ -143,12 +143,15 @@
     $('busca').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  // Se já há resultados na tela, trocar Comprar/Alugar refaz a busca na hora.
+  function refazer() { if (!$('resultados').hidden) buscar(); }
+
   function ligar() {
     Array.prototype.forEach.call(document.querySelectorAll('.search__tab'), function (t) {
-      t.addEventListener('click', function () { setFinalidade(t.getAttribute('data-finalidade')); });
+      t.addEventListener('click', function () { setFinalidade(t.getAttribute('data-finalidade')); refazer(); });
     });
     Array.prototype.forEach.call(document.querySelectorAll('.js-tab-link'), function (a) {
-      a.addEventListener('click', function () { setFinalidade(a.getAttribute('data-finalidade') || 'Venda'); });
+      a.addEventListener('click', function () { setFinalidade(a.getAttribute('data-finalidade') || 'Venda'); refazer(); });
     });
     $('searchForm').addEventListener('submit', buscar);
     $('clearSearch').addEventListener('click', limpar);

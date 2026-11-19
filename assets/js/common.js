@@ -35,10 +35,8 @@
     });
   }
 
-  function tbc(label) {
-    return '<span class="tbc" title="Dado a confirmar com a cliente">' +
-      (label ? esc(label) + ' ' : '') + '[a confirmar]</span>';
-  }
+  // Sem anotações de desenvolvedor no layout: dado ausente = campo escondido.
+  function tbc() { return ''; }
 
   /* Fatos do imóvel: só mostra o que existe — nunca "-". */
   function fatos(im, cls) {
@@ -131,17 +129,6 @@
     Array.prototype.forEach.call((root || document).querySelectorAll('[data-mail]'), function (a) {
       a.href = 'mailto:' + S.email;
     });
-    Array.prototype.forEach.call((root || document).querySelectorAll('[data-whats-numero]'), function (el) {
-      el.innerHTML = S.whatsapp ? esc(S.whatsapp) : tbc('número');
-    });
-    Array.prototype.forEach.call((root || document).querySelectorAll('[data-prazo]'), function (el) {
-      el.innerHTML = S.prazoResposta
-        ? 'Respondemos em até ' + esc(S.prazoResposta) + ', no horário de atendimento.'
-        : 'Prazo de resposta ' + tbc() + ' · ' + esc(S.horario);
-    });
-    Array.prototype.forEach.call((root || document).querySelectorAll('[data-tbc]'), function (el) {
-      el.innerHTML = tbc(el.getAttribute('data-tbc'));
-    });
   }
 
   function menu() {
@@ -169,6 +156,20 @@
     f();
   }
 
+  /* Botão flutuante: só aparece depois que a busca/topo sai da tela. */
+  function whatsFlutuante() {
+    var b = document.querySelector('.whats-float');
+    if (!b) return;
+    var alvo = document.getElementById('busca') || document.getElementById('gallery');
+    function f() {
+      var limite = alvo ? alvo.getBoundingClientRect().bottom : 400;
+      b.classList.toggle('is-on', limite < 0 || (!alvo && window.scrollY > 400));
+    }
+    window.addEventListener('scroll', f, { passive: true });
+    window.addEventListener('resize', f);
+    f();
+  }
+
   function ano() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-ano]'), function (el) {
       el.textContent = String(new Date().getFullYear());
@@ -185,6 +186,7 @@
     ligarContatos();
     menu();
     cabecalhoAoRolar();
+    whatsFlutuante();
     ano();
   });
 })();

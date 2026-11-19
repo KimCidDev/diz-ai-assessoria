@@ -16,8 +16,17 @@
   var im = D.porId(idDaUrl()) || D.porId('D1NO');
 
   function msgWhats() {
-    var ref = im.codigo ? 'o imóvel ' + im.codigo : 'o imóvel no ' + im.bairro;
+    var ref = im.codigo ? 'o imóvel ' + im.codigo : 'o imóvel ' + D.noBairro(im.bairro);
     return 'Olá, tenho interesse n' + ref + ' (' + im.bairro + ', ' + D.preco(im.preco) + '). Pode me passar mais informações?';
+  }
+
+  function resumoAuto() {
+    var p = [D.tituloDe(im)];
+    var d = [];
+    if (im.banheiros != null) d.push(im.banheiros + (im.banheirosMais ? '+' : '') + (im.banheiros === 1 && !im.banheirosMais ? ' banheiro' : ' banheiros'));
+    if (im.vagas != null) d.push(im.vagas + (im.vagas === 1 ? ' vaga de garagem' : ' vagas de garagem'));
+    if (im.area != null) d.push(im.area + ' m²');
+    return p[0] + (d.length ? ', com ' + d.join(', ').replace(/, ([^,]*)$/, ' e $1') : '') + '.';
   }
 
   function cabecalho() {
@@ -31,28 +40,31 @@
         '<p class="detail__price">' + D.preco(im.preco) + '</p>' +
         (im.codigo ? '<p class="detail__code">Código <strong>' + UI.esc(im.codigo) + '</strong></p>' : '') +
       '</div>' +
-      (UI.fatos(im, 'facts facts--big') || '<p class="muted">Dormitórios, vagas e área ' + UI.tbc() + '</p>');
+      UI.fatos(im, 'facts facts--big');
     document.title = D.tituloDe(im) + ' · Diz Assessoria Imobiliária';
   }
 
   function valores() {
-    function v(label, val) {
-      return '<div class="kv"><dt>' + label + '</dt><dd>' + (val != null ? D.preco(val) : UI.tbc()) + '</dd></div>';
-    }
-    $('valores').innerHTML = '<dl class="kvs">' +
-      v('Valor de venda', im.preco) + v('Condomínio', im.condominio) + v('IPTU', im.iptu) + '</dl>';
+    // Só mostra o que existe: condomínio e IPTU aparecem quando informados.
+    var linhas = [['Valor de ' + (im.finalidade === 'Aluguel' ? 'aluguel' : 'venda'), D.preco(im.preco)]];
+    if (im.condominio != null) linhas.push(['Condomínio', D.preco(im.condominio)]);
+    if (im.iptu != null) linhas.push(['IPTU', D.preco(im.iptu)]);
+    (im.extras || []).forEach(function (e) { linhas.push(e); });
+    $('valores').innerHTML = '<dl class="kvs">' + linhas.map(function (l) {
+      return '<div class="kv"><dt>' + UI.esc(l[0]) + '</dt><dd>' + UI.esc(l[1]) + '</dd></div>';
+    }).join('') + '</dl>';
   }
 
   function descricao() {
     $('descricao').innerHTML = im.descricao
       ? im.descricao.map(function (p) { return '<p>' + UI.esc(p) + '</p>'; }).join('')
-      : '<p>Descrição completa deste imóvel ' + UI.tbc() + '</p>';
+      : '<p>' + UI.esc(resumoAuto()) + '</p><p>Fale com a nossa equipe para receber a ficha completa, as fotos e os valores deste imóvel — e para agendar uma visita.</p>';
   }
 
   function caracteristicas() {
     var c = im.caracteristicas;
     if (!c) {
-      $('caracteristicas').innerHTML = '<h2 class="h3">Características</h2><p class="muted">Lista de características ' + UI.tbc() + '</p>';
+      $('caracteristicas').hidden = true;
       return;
     }
     var html = '<h2 class="h3">Características</h2><div class="feat-groups">';
@@ -66,12 +78,12 @@
   function localizacao() {
     var q = (im.endereco ? im.endereco + ', ' : '') + im.bairro + ', Porto Alegre - RS';
     $('endereco').innerHTML = UI.ICON.pin + '<span>' +
-      (im.endereco ? UI.esc(im.endereco) + ' · ' : 'Rua e número ' + UI.tbc() + ' · ') +
-      UI.esc(im.bairro) + ', Porto Alegre – RS</span>';
+      (im.endereco ? UI.esc(im.endereco) + ' · ' : '') + UI.esc(im.bairro) + ', Porto Alegre – RS' +
+      (im.endereco ? '' : '<small>Endereço completo informado no agendamento da visita.</small>') + '</span>';
     $('mapa').src = 'https://maps.google.com/maps?q=' + encodeURIComponent(q) + '&z=' + (im.endereco ? 16 : 14) + '&output=embed';
     $('mapaLink').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
-    $('bairroTexto').innerHTML = '<h3>O bairro</h3><p>' +
-      (im.bairroTexto ? UI.esc(im.bairroTexto) : 'Texto sobre o ' + UI.esc(im.bairro) + ' ' + UI.tbc()) + '</p>';
+    if (im.bairroTexto) $('bairroTexto').innerHTML = '<h3>O bairro</h3><p>' + UI.esc(im.bairroTexto) + '</p>';
+    else $('bairroTexto').hidden = true;
   }
 
   function contato() {

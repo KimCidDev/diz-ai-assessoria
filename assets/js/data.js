@@ -3,7 +3,7 @@
  * --------------------------------------------------------------
  * Tudo aqui vem do site atual (dizassessoria.com.br, lido em
  * 18 nov 2026). O que não aparece no site fica como null e o
- * site mostra "[a confirmar]" ou esconde o campo.
+ * site esconde o campo (sem anotações visíveis).
  *
  * Fotos: imagens ilustrativas (Unsplash), só para a prévia.
  * As fotos reais de cada imóvel entram depois, com a cliente.
@@ -63,6 +63,7 @@ window.DIZ = (function () {
         'O prédio': ['Elevador', 'Salão de festas com churrasqueira', 'Recuado, com jardim'],
         'Documentação': ['Box escriturado', 'Imóvel quitado']
       },
+      extras: [['Documentação', 'Imóvel quitado'], ['Garagem', 'Box escriturado']],
       fotos: [
         '1502672260266-1c1ef2d93688',
         '1560448204-e02f11c3d0e2',
@@ -78,19 +79,19 @@ window.DIZ = (function () {
       id: 'azenha-220',
       codigo: null,
       finalidade: 'Venda',
-      tipo: null,
+      tipo: 'Apartamento', // tipo: exemplo para a prévia
       bairro: 'Azenha',
       cidade: 'Porto Alegre',
       preco: 220000,
-      // Cartão do site atual: 2 dorm., 1 banh.; vagas e área vazias -> escondidas.
-      dormitorios: 2, banheiros: 1, vagas: null, area: null,
+      // Cartão do site atual: 2 dorm., 1 banh. Área FICTÍCIA (exemplo para a prévia).
+      dormitorios: 2, banheiros: 1, vagas: null, area: 58,
       fotos: ['1600566753190-17f0baa2a6c3', '1586023492125-27b2c045efd7']
     },
     {
       id: 'jardim-botanico-265',
       codigo: null,
       finalidade: 'Venda',
-      tipo: null,
+      tipo: 'Apartamento', // tipo: exemplo para a prévia
       bairro: 'Jardim Botânico',
       cidade: 'Porto Alegre',
       preco: 265000,
@@ -102,7 +103,7 @@ window.DIZ = (function () {
       id: 'menino-deus-590',
       codigo: null,
       finalidade: 'Venda',
-      tipo: null,
+      tipo: 'Apartamento', // tipo: exemplo para a prévia
       bairro: 'Menino Deus',
       cidade: 'Porto Alegre',
       preco: 590000,
@@ -117,7 +118,7 @@ window.DIZ = (function () {
       // Na prévia o selo foi retirado em vez de mostrar algo ambíguo.
       finalidade: 'Venda',
       selo: null,
-      tipo: null,
+      tipo: 'Casa', // tipo: exemplo para a prévia
       bairro: 'Menino Deus',
       cidade: 'Porto Alegre',
       preco: 980000,
@@ -130,7 +131,7 @@ window.DIZ = (function () {
       codigo: null,
       finalidade: 'Venda',
       destaque: true,
-      tipo: null,
+      tipo: 'Casa', // tipo: exemplo para a prévia
       bairro: 'Menino Deus',
       cidade: 'Porto Alegre',
       preco: 1200000,
@@ -145,7 +146,7 @@ window.DIZ = (function () {
     comprar: '1600585154340-be6161a56a0c',
     alugar: '1522708323590-d24dbb6b0267',
     condominios: '1545324418-cc1a3fa10c00',
-    equipe: null // foto real da equipe [a confirmar]
+    escritorio: '1497366216548-37526070297c' // ambiente, sem pessoas; trocar por foto real da equipe
   };
 
   function preco(v) {
@@ -153,9 +154,15 @@ window.DIZ = (function () {
     return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
+  // Preposição correta por bairro (em Porto Alegre se diz "na Azenha").
+  var NA = { 'Azenha': 'na' };
+  function noBairro(b) { return (NA[b] || 'no') + ' ' + b; }
+
   function tituloDe(im) {
     if (im.titulo) return im.titulo;
-    return (im.tipo || 'Imóvel') + ' no ' + im.bairro;
+    var t = im.tipo || 'Imóvel';
+    if (im.dormitorios != null) t += ' de ' + im.dormitorios + (im.dormitorios === 1 ? ' dormitório' : ' dormitórios');
+    return t + ' ' + noBairro(im.bairro);
   }
 
   function linkWhats(msg) {
@@ -183,6 +190,7 @@ window.DIZ = (function () {
     foto: foto,
     preco: preco,
     tituloDe: tituloDe,
+    noBairro: noBairro,
     linkWhats: linkWhats,
     porId: porId
   };
