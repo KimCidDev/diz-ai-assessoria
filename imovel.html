@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Apartamento de 1 dormitório no Nonoai · Diz Assessoria Imobiliária</title>
+  <meta name="description" content="Apartamento à venda no Nonoai, Porto Alegre: 1 dormitório, 1 banheiro, 1 vaga, 50 m². R$ 190.000,00. Código D1NO.">
+  <meta name="theme-color" content="#14171A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314171A'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23E6D3B3'%3EDiz%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-imovel">
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="index.html" aria-label="Diz Assessoria Imobiliária — início">
+      <span class="brand__mark">Diz</span>
+      <span class="brand__sub">Assessoria<br>Imobiliária</span>
+    </a>
+    <nav class="nav" id="menu" aria-label="Menu principal">
+      <a href="index.html#busca">Comprar</a>
+      <a href="index.html#busca">Alugar</a>
+      <a href="index.html#servicos">Condomínios</a>
+      <a href="index.html#sobre">Sobre nós</a>
+      <a href="#contato">Contato</a>
+      <a class="nav__portal" href="https://diz.virtualimobi.com" target="_blank" rel="noopener">Portal do cliente · 2ª via de boleto</a>
+    </nav>
+    <a class="header-call" data-tel href="tel:+555130283188" aria-label="Ligar para a Diz"><span data-icon="phone"></span><span class="header-call__txt">(51) 3028-3188</span></a>
+    <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="imovel">
+  <div class="wrap crumbs">
+    <a href="index.html#imoveis" class="crumbs__back"><span data-icon="back"></span>Voltar aos imóveis</a>
+    <div class="crumbs__tools">
+      <button type="button" class="icon-btn" id="btnFav" aria-pressed="false" aria-label="Salvar nos favoritos"><span data-icon="heart"></span></button>
+      <button type="button" class="icon-btn" id="btnShare" aria-label="Compartilhar"><span data-icon="share"></span></button>
+    </div>
+  </div>
+
+  <!-- GALERIA: deslizar no celular, contador de fotos, tela cheia -->
+  <section class="gallery" id="gallery" aria-label="Fotos do imóvel">
+    <div class="gallery__track" id="galleryTrack" tabindex="0"></div>
+    <button type="button" class="gallery__nav gallery__nav--prev" id="gPrev" aria-label="Foto anterior"><span data-icon="back"></span></button>
+    <button type="button" class="gallery__nav gallery__nav--next" id="gNext" aria-label="Próxima foto"><span data-icon="arrow"></span></button>
+    <span class="gallery__count" id="gCount">1 / 1</span>
+    <button type="button" class="gallery__full" id="gFull" aria-label="Ver fotos em tela cheia"><span data-icon="expand"></span></button>
+    <button type="button" class="gallery__close" id="gClose" aria-label="Fechar tela cheia"><span data-icon="close"></span></button>
+    <p class="gallery__note">Imagens ilustrativas</p>
+  </section>
+
+  <div class="wrap detail">
+    <div class="detail__main">
+      <!-- Um único bloco de preço e dados -->
+      <header class="detail__head" id="detailHead"></header>
+
+      <section class="detail__block" id="valores" aria-label="Valores"></section>
+
+      <section class="detail__block">
+        <h2 class="h3">Sobre o imóvel</h2>
+        <div class="prose" id="descricao"></div>
+      </section>
+
+      <section class="detail__block" id="caracteristicas"></section>
+
+      <section class="detail__block" id="localizacao">
+        <h2 class="h3">Localização</h2>
+        <p class="addr" id="endereco"></p>
+        <div class="map"><iframe id="mapa" title="Mapa da região do imóvel" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <a class="link-arrow" id="mapaLink" target="_blank" rel="noopener">Abrir no Google Maps <span data-icon="arrow"></span></a>
+        <div class="bairro" id="bairroTexto"></div>
+      </section>
+    </div>
+
+    <!-- CONTATO: fixo ao lado no desktop, no fim da página no celular -->
+    <aside class="detail__side" id="contato">
+      <div class="contact-card">
+        <p class="contact-card__price" id="sidePrice"></p>
+        <p class="contact-card__code" id="sideCode"></p>
+        <a class="btn btn--whats btn--block" id="sideWhats"><span data-icon="whats"></span>Conversar no WhatsApp</a>
+        <a class="btn btn--ghost btn--block" data-tel href="tel:+555130283188"><span data-icon="phone"></span>Ligar · (51) 3028-3188</a>
+        <form class="mini-form" id="miniForm" novalidate>
+          <p class="mini-form__title">Ou deixe seu contato</p>
+          <label class="field field--light"><span>Nome</span><input name="nome" id="mNome" autocomplete="name" required></label>
+          <label class="field field--light"><span>Telefone ou e-mail</span><input name="contato" id="mContato" autocomplete="tel" required></label>
+          <label class="field field--light"><span>Mensagem</span><textarea name="msg" id="mMsg" rows="3"></textarea></label>
+          <button class="btn btn--dark btn--block" type="submit">Enviar mensagem</button>
+          <p class="mini-form__err" id="mErr" hidden>Preencha nome e um telefone ou e-mail.</p>
+        </form>
+        <p class="contact-card__prazo" data-prazo></p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- IMÓVEIS SIMILARES: mesma faixa de preço, para continuar navegando -->
+  <section class="section section--sand" id="similares">
+    <div class="wrap">
+      <div class="section__head section__head--row">
+        <div>
+          <p class="eyebrow">Continue explorando</p>
+          <h2 class="h2">Imóveis similares</h2>
+        </div>
+        <a class="link-arrow" href="index.html#busca">Ver todos <span data-icon="arrow"></span></a>
+      </div>
+      <div class="grid" id="similaresGrid"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Barra de contato fixa no celular -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn--whats" id="stickyWhats"><span data-icon="whats"></span>WhatsApp</a>
+  <a class="btn btn--dark" data-tel href="tel:+555130283188"><span data-icon="phone"></span>Ligar</a>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer">
+    <div class="footer__brand">
+      <a class="brand brand--footer" href="index.html"><span class="brand__mark">Diz</span><span class="brand__sub">Assessoria<br>Imobiliária</span></a>
+      <p>CRECI 32490</p>
+    </div>
+    <div class="footer__col">
+      <h3>Imóveis</h3>
+      <a href="index.html#busca">Comprar</a>
+      <a href="index.html#busca">Alugar</a>
+      <a href="index.html#servicos">Condomínios</a>
+    </div>
+    <div class="footer__col">
+      <h3>Cliente</h3>
+      <a href="https://diz.virtualimobi.com" target="_blank" rel="noopener">Portal do cliente</a>
+      <a href="https://diz.virtualimobi.com" target="_blank" rel="noopener">2ª via de boleto</a>
+      <a href="index.html#contato">Contato</a>
+    </div>
+    <div class="footer__col">
+      <h3>Escritório</h3>
+      <p>Av. Getúlio Vargas, 1410/204<br>Menino Deus, Porto Alegre – RS</p>
+      <p><a data-tel href="tel:+555130283188">(51) 3028-3188</a></p>
+    </div>
+  </div>
+  <div class="wrap footer__base">
+    <div class="seals">
+      <span class="seal"><span data-icon="shield"></span>LGPD</span>
+      <span class="seal"><span data-icon="lock"></span>SSL</span>
+    </div>
+    <p>© <span data-ano>2026</span> Diz Assessoria Imobiliária · Todos os direitos reservados.</p>
+    <p class="footer__note">Imagens ilustrativas nesta prévia.</p>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/imovel.js"></script>
+</body>
+</html>
