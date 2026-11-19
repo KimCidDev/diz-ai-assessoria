@@ -113,6 +113,7 @@
     Array.prototype.forEach.call(els, function (el) {
       var i = ICON[el.getAttribute('data-icon')];
       if (i) el.insertAdjacentHTML('afterbegin', i);
+      if (!el.textContent.trim()) el.classList.add('ico'); // só o ícone: centralizar
       el.removeAttribute('data-icon');
     });
   }

@@ -491,3 +491,13 @@ section[id], #contato { scroll-margin-top: calc(var(--header-h) + 12px); }
 .social svg { width: 17px; height: 17px; }
 .seals { align-items: center; }
 @media (min-width: 640px) { .contact__actions { grid-template-columns: auto auto auto; } }
+
+/* --- Ícones centrados ------------------------------------
+   Um <span> comum reserva a altura da linha de texto e empurra
+   o SVG para cima; como caixa flex sem altura de linha, fica no centro. */
+.ico { display: inline-flex; align-items: center; justify-content: center; line-height: 0; }
+.ico svg { display: block; }
+.header-call { justify-content: center; line-height: 1; }
+@media (max-width: 639px) {
+  .header-call { width: 44px; height: 44px; padding: 0; gap: 0; }
+}
