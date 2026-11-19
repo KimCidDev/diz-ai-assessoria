@@ -30,14 +30,10 @@ python3 -m http.server 8000
 
 ## Dados
 
-Os dados vêm do site atual (dizassessoria.com.br, lido em 18 nov 2026). O que não aparece lá
-fica como `null` em `data.js` e aparece no site como **[a confirmar]** ou é escondido:
+Os preços e o D1NO vêm do site atual (dizassessoria.com.br, lido em 18 nov 2026). A prévia é um
+**mock-up representativo**: não mostra anotações de desenvolvedor; o que falta é escondido.
 
-- número do WhatsApp (`SITE.whatsapp`) — sem ele, o botão abre o WhatsApp com a mensagem pronta para escolher o contato
-- prazo de resposta (`SITE.prazoResposta`)
-- endereço (rua e número), condomínio e IPTU do D1NO
-- tipo, código, dormitórios, vagas e área dos outros 5 imóveis
-- significado do selo "COMPRA" (retirado na prévia)
-- foto da equipe, número de condomínios geridos, depoimentos, logotipo oficial, links das redes sociais
-
-As fotos são **ilustrativas** (Unsplash) e o site informa isso. As fotos reais entram depois, com a cliente.
+Em `assets/js/data.js`, marcado nos comentários:
+- **FICTÍCIO / exemplo:** tipos dos 5 imóveis; dorm./banh./vagas/área do Jardim Botânico, Menino Deus R$ 590 mil e R$ 980 mil; área da Azenha
+- **Falta da cliente:** número do WhatsApp (`SITE.whatsapp` — sem ele, o botão abre o WhatsApp com a mensagem pronta para escolher o contato), condomínio/IPTU/endereço do D1NO, área do D1NO (detalhe diz 50 m², cartão diz 43 m²), foto da equipe, logotipo oficial, Instagram, significado do selo "COMPRA"
+- **Fotos:** Unsplash, ilustrativas; a página tem `noindex` para não aparecer em buscadores
