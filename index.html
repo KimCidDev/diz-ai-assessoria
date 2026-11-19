@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Diz Assessoria Imobiliária · Imóveis em Porto Alegre</title>
+  <meta name="description" content="Compra, venda, locação e gestão de condomínios em Porto Alegre. Profissionais com 30 anos de expertise. CRECI 32490.">
+  <meta name="theme-color" content="#14171A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314171A'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23E6D3B3'%3EDiz%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-home">
+
+<header class="site-header site-header--over">
+  <div class="wrap site-header__in">
+    <a class="brand" href="index.html" aria-label="Diz Assessoria Imobiliária — início">
+      <span class="brand__mark">Diz</span>
+      <span class="brand__sub">Assessoria<br>Imobiliária</span>
+    </a>
+    <nav class="nav" id="menu" aria-label="Menu principal">
+      <a href="#busca" data-finalidade="Venda" class="js-tab-link">Comprar</a>
+      <a href="#busca" data-finalidade="Aluguel" class="js-tab-link">Alugar</a>
+      <a href="#servicos">Condomínios</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#sobre">Sobre nós</a>
+      <a href="#contato">Contato</a>
+      <a class="nav__portal" href="https://diz.virtualimobi.com" target="_blank" rel="noopener">Portal do cliente · 2ª via de boleto</a>
+    </nav>
+    <a class="header-call" data-tel href="tel:+555130283188" aria-label="Ligar para a Diz"><span data-icon="phone"></span><span class="header-call__txt">(51) 3028-3188</span></a>
+    <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO: foto grande, uma frase de posicionamento, busca em destaque -->
+  <section class="hero" id="topo">
+    <div class="hero__img" id="heroImg" role="img" aria-label="Sala de estar ampla e iluminada"></div>
+    <div class="hero__shade"></div>
+    <div class="wrap hero__in">
+      <p class="eyebrow eyebrow--light">Porto Alegre · CRECI 32490</p>
+      <h1 class="hero__title">30 anos de expertise<br><em>em encontrar o seu endereço.</em></h1>
+      <p class="hero__lead">Compra, venda, locação e gestão de condomínios — com atendimento no Menino Deus.</p>
+    </div>
+  </section>
+
+  <!-- BUSCA COMPLETA -->
+  <section class="search-wrap" id="busca" aria-label="Buscar imóveis">
+    <div class="wrap">
+      <form class="search" id="searchForm" novalidate>
+        <div class="search__tabs" role="tablist" aria-label="Finalidade">
+          <button type="button" role="tab" class="search__tab is-active" data-finalidade="Venda" aria-selected="true">Comprar</button>
+          <button type="button" role="tab" class="search__tab" data-finalidade="Aluguel" aria-selected="false">Alugar</button>
+        </div>
+        <input type="hidden" name="finalidade" id="fFinalidade" value="Venda">
+        <div class="search__grid">
+          <label class="field">
+            <span>Cidade</span>
+            <select name="cidade" id="fCidade"><option value="Porto Alegre">Porto Alegre</option></select>
+          </label>
+          <label class="field">
+            <span>Bairro</span>
+            <select name="bairro" id="fBairro"><option value="">Todos</option></select>
+          </label>
+          <label class="field">
+            <span>Preço mínimo</span>
+            <select name="min" id="fMin">
+              <option value="">Sem mínimo</option>
+              <option value="150000">R$ 150 mil</option>
+              <option value="200000">R$ 200 mil</option>
+              <option value="300000">R$ 300 mil</option>
+              <option value="500000">R$ 500 mil</option>
+              <option value="800000">R$ 800 mil</option>
+              <option value="1000000">R$ 1 milhão</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Preço máximo</span>
+            <select name="max" id="fMax">
+              <option value="">Sem máximo</option>
+              <option value="200000">R$ 200 mil</option>
+              <option value="300000">R$ 300 mil</option>
+              <option value="500000">R$ 500 mil</option>
+              <option value="800000">R$ 800 mil</option>
+              <option value="1000000">R$ 1 milhão</option>
+              <option value="1500000">R$ 1,5 milhão</option>
+            </select>
+          </label>
+          <div class="field field--chips">
+            <span>Dormitórios</span>
+            <div class="chips" data-name="dorm">
+              <button type="button" class="chip is-active" data-v="">Todos</button>
+              <button type="button" class="chip" data-v="1">1+</button>
+              <button type="button" class="chip" data-v="2">2+</button>
+              <button type="button" class="chip" data-v="3">3+</button>
+            </div>
+          </div>
+          <div class="field field--chips">
+            <span>Vagas</span>
+            <div class="chips" data-name="vagas">
+              <button type="button" class="chip is-active" data-v="">Todas</button>
+              <button type="button" class="chip" data-v="1">1+</button>
+              <button type="button" class="chip" data-v="2">2+</button>
+            </div>
+          </div>
+          <label class="field field--code">
+            <span>Código</span>
+            <input type="text" name="codigo" id="fCodigo" placeholder="Ex.: D1NO" autocomplete="off" autocapitalize="characters">
+          </label>
+        </div>
+        <button class="btn btn--dark btn--block search__go" type="submit"><span data-icon="search"></span>Buscar imóveis</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- RESULTADOS (aparece só depois de buscar) -->
+  <section class="section results" id="resultados" hidden>
+    <div class="wrap">
+      <div class="results__head">
+        <div>
+          <p class="eyebrow">Resultado da busca</p>
+          <h2 class="h2" id="resultsTitle">Imóveis encontrados</h2>
+          <p class="results__summary" id="resultsSummary"></p>
+        </div>
+        <button type="button" class="link-btn" id="clearSearch">Limpar filtros</button>
+      </div>
+      <div class="grid" id="resultsGrid"></div>
+      <div class="empty" id="resultsEmpty" hidden>
+        <p class="empty__title">Nenhum imóvel com esses filtros — ainda.</p>
+        <p>Conte o que você procura e a nossa equipe busca por você.</p>
+        <div class="empty__actions">
+          <a class="btn btn--whats" data-whats="Olá, procuro um imóvel e não encontrei no site. Podem me ajudar?"><span data-icon="whats"></span>Falar no WhatsApp</a>
+          <button type="button" class="btn btn--ghost" id="clearSearch2">Ver todos os imóveis</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VITRINE: destaque único + últimos imóveis, sem repetição -->
+  <section class="section" id="vitrine">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Destaque</p>
+        <h2 class="h2">Endereços escolhidos <em>a dedo.</em></h2>
+      </div>
+      <div id="featured"></div>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="imoveis">
+    <div class="wrap">
+      <div class="section__head section__head--row">
+        <div>
+          <p class="eyebrow">À venda</p>
+          <h2 class="h2">Últimos imóveis</h2>
+        </div>
+        <a class="link-arrow" href="#busca">Refinar busca <span data-icon="arrow"></span></a>
+      </div>
+      <div class="grid" id="latest"></div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section section--sand" id="servicos">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Como podemos ajudar</p>
+        <h2 class="h2">Comprar, alugar <em>ou cuidar</em> do seu condomínio.</h2>
+      </div>
+      <div class="tiles">
+        <a class="tile js-tab-link" href="#busca" data-finalidade="Venda">
+          <img data-src="" data-img="comprar" alt="Casa moderna com jardim">
+          <span class="tile__txt"><strong>Comprar</strong> um imóvel</span>
+          <span class="tile__go" data-icon="arrow"></span>
+        </a>
+        <a class="tile js-tab-link" href="#busca" data-finalidade="Aluguel">
+          <img data-src="" data-img="alugar" alt="Apartamento mobiliado e iluminado">
+          <span class="tile__txt"><strong>Alugar</strong> um imóvel</span>
+          <span class="tile__go" data-icon="arrow"></span>
+        </a>
+        <a class="tile" data-whats="Olá, gostaria de falar sobre gestão de condomínio com a Diz.">
+          <img data-src="" data-img="condominios" alt="Fachada de edifício residencial">
+          <span class="tile__txt"><strong>Gestão</strong> de condomínios</span>
+          <span class="tile__go" data-icon="arrow"></span>
+        </a>
+      </div>
+      <ul class="service-list">
+        <li><a data-whats="Olá, gostaria de informações sobre Lançamentos.">Lançamentos <span data-icon="chev"></span></a></li>
+        <li><a data-whats="Olá, gostaria de ajuda com Financiamento.">Financiamento <span data-icon="chev"></span></a></li>
+        <li><a data-whats="Olá, gostaria de usar os Simuladores / fazer uma simulação.">Simuladores <span data-icon="chev"></span></a></li>
+        <li><a data-whats="Olá, preciso de ajuda com Documentações.">Documentações <span data-icon="chev"></span></a></li>
+        <li><a data-whats="Olá, gostaria de falar sobre Parcerias.">Parcerias <span data-icon="chev"></span></a></li>
+        <li><a data-whats="Olá, quero anunciar o meu imóvel com a Diz.">Anunciar meu imóvel <span data-icon="chev"></span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SOBRE / CONFIANÇA -->
+  <section class="section" id="sobre">
+    <div class="wrap about">
+      <div class="about__text">
+        <p class="eyebrow">Sobre a Diz</p>
+        <h2 class="h2">Profissionais com <em>30 anos</em> de expertise no mercado imobiliário.</h2>
+        <p class="lead">Especializada em gestão de condomínios e intermediação de compra e venda, a Diz atende Porto Alegre a partir do escritório no Menino Deus.</p>
+        <dl class="stats">
+          <div><dt>30 anos</dt><dd>de expertise</dd></div>
+          <div><dt>32490</dt><dd>CRECI</dd></div>
+          <div><dt data-tbc="">[a confirmar]</dt><dd>condomínios geridos</dd></div>
+        </dl>
+      </div>
+      <figure class="about__photo">
+        <div class="photo-tbc">
+          <span>Foto real da equipe</span>
+          <span class="tbc">[a confirmar]</span>
+        </div>
+      </figure>
+      <blockquote class="quote">
+        <p>Depoimentos de clientes <span class="tbc">[a confirmar]</span></p>
+        <footer>Espaço reservado para avaliações reais, com autorização dos clientes.</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="section section--dark" id="contato">
+    <div class="wrap contact">
+      <div class="contact__text">
+        <p class="eyebrow eyebrow--light">Fale com a Diz</p>
+        <h2 class="h2 h2--light">Uma conversa resolve <em>mais que dez buscas.</em></h2>
+        <p class="contact__prazo" data-prazo></p>
+        <div class="contact__actions">
+          <a class="btn btn--whats" data-whats="Olá, vim pelo site da Diz e gostaria de atendimento."><span data-icon="whats"></span>WhatsApp</a>
+          <a class="btn btn--light" data-tel href="tel:+555130283188"><span data-icon="phone"></span>(51) 3028-3188</a>
+        </div>
+        <ul class="contact__list">
+          <li><span data-icon="pin"></span><span>Av. Getúlio Vargas, 1410/204<br>Menino Deus, Porto Alegre – RS</span></li>
+          <li><span data-icon="clock"></span><span>Seg. a sex., 09:00–12:00 e 13:30–17:00</span></li>
+          <li><span data-icon="mail"></span><a data-mail href="mailto:web@dizassessoria.com.br">web@dizassessoria.com.br</a></li>
+          <li><span data-icon="whats"></span><span>WhatsApp: <span data-whats-numero></span></span></li>
+        </ul>
+        <div class="route">
+          <a class="link-arrow link-arrow--light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Get%C3%BAlio+Vargas,+1410+-+Menino+Deus,+Porto+Alegre+-+RS" target="_blank" rel="noopener">Traçar rota · Google Maps <span data-icon="arrow"></span></a>
+          <a class="link-arrow link-arrow--light" href="https://waze.com/ul?q=Av.%20Get%C3%BAlio%20Vargas%201410%20Porto%20Alegre&amp;navigate=yes" target="_blank" rel="noopener">Waze <span data-icon="arrow"></span></a>
+        </div>
+      </div>
+      <div class="map map--dark">
+        <iframe title="Mapa do escritório da Diz no Menino Deus" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=Av.+Get%C3%BAlio+Vargas,+1410,+Menino+Deus,+Porto+Alegre+-+RS&amp;z=15&amp;output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer">
+    <div class="footer__brand">
+      <a class="brand brand--footer" href="index.html"><span class="brand__mark">Diz</span><span class="brand__sub">Assessoria<br>Imobiliária</span></a>
+      <p>CRECI 32490</p>
+    </div>
+    <div class="footer__col">
+      <h3>Imóveis</h3>
+      <a class="js-tab-link" href="#busca" data-finalidade="Venda">Comprar</a>
+      <a class="js-tab-link" href="#busca" data-finalidade="Aluguel">Alugar</a>
+      <a href="#servicos">Condomínios</a>
+    </div>
+    <div class="footer__col">
+      <h3>Cliente</h3>
+      <a href="https://diz.virtualimobi.com" target="_blank" rel="noopener">Portal do cliente</a>
+      <a href="https://diz.virtualimobi.com" target="_blank" rel="noopener">2ª via de boleto</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="footer__col">
+      <h3>Escritório</h3>
+      <p>Av. Getúlio Vargas, 1410/204<br>Menino Deus, Porto Alegre – RS</p>
+      <p><a data-tel href="tel:+555130283188">(51) 3028-3188</a></p>
+    </div>
+  </div>
+  <div class="wrap footer__base">
+    <div class="seals">
+      <span class="seal"><span data-icon="shield"></span>LGPD</span>
+      <span class="seal"><span data-icon="lock"></span>SSL</span>
+    </div>
+    <p>© <span data-ano>2026</span> Diz Assessoria Imobiliária · Todos os direitos reservados.</p>
+    <p class="footer__note">Imagens ilustrativas nesta prévia.</p>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>
