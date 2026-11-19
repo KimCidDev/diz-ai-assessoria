@@ -34,6 +34,7 @@ Os preços e o D1NO vêm do site atual (dizassessoria.com.br, lido em 18 nov 202
 **mock-up representativo**: não mostra anotações de desenvolvedor; o que falta é escondido.
 
 Em `assets/js/data.js`, marcado nos comentários:
-- **FICTÍCIO / exemplo:** tipos dos 5 imóveis; dorm./banh./vagas/área do Jardim Botânico, Menino Deus R$ 590 mil e R$ 980 mil; área da Azenha
-- **Falta da cliente:** número do WhatsApp (`SITE.whatsapp` — sem ele, o botão abre o WhatsApp com a mensagem pronta para escolher o contato), condomínio/IPTU/endereço do D1NO, área do D1NO (detalhe diz 50 m², cartão diz 43 m²), foto da equipe, logotipo oficial, Instagram, significado do selo "COMPRA"
+- **FICTÍCIO / exemplo:** os 3 aluguéis (Menino Deus, Cidade Baixa, Petrópolis); tipos dos 5 imóveis à venda; dorm./banh./vagas/área do Jardim Botânico, Menino Deus R$ 590 mil e R$ 980 mil; área da Azenha
+- **Contatos em modo demonstração:** botões de WhatsApp e Instagram aparecem mas não redirecionam (`SITE.redirecionarContatos = false`). Com `SITE.whatsapp` e `SITE.instagram` preenchidos, troque para `true`.
+- **Falta da cliente:** condomínio/IPTU/endereço do D1NO (área: vale os 50 m² da página de detalhe), foto da equipe, logotipo oficial, Instagram, significado do selo "COMPRA"
 - **Fotos:** Unsplash, ilustrativas; a página tem `noindex` para não aparecer em buscadores

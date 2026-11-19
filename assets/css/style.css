@@ -483,3 +483,11 @@ section[id], #contato { scroll-margin-top: calc(var(--header-h) + 12px); }
   .why { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .page-imovel .whats-float { display: grid; }
 }
+
+/* --- Instagram ------------------------------------------- */
+.btn--outline-light { background: transparent; border-color: rgba(255,255,255,.4); color: #fff; }
+.btn--outline-light:hover { border-color: #fff; }
+.social { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); color: #fff; }
+.social svg { width: 17px; height: 17px; }
+.seals { align-items: center; }
+@media (min-width: 640px) { .contact__actions { grid-template-columns: auto auto auto; } }

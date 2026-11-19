@@ -18,7 +18,11 @@ window.DIZ = (function () {
     telefoneLink: 'tel:+555130283188',
     // Número do WhatsApp não aparece no texto do site atual.
     // Quando a cliente confirmar, preencha só os dígitos, ex.: '5551999999999'.
-    whatsapp: '', // [a confirmar]
+    whatsapp: '', // número a receber da cliente
+    instagram: '', // endereço a receber da cliente
+    // Prova de conceito: botões de WhatsApp e Instagram aparecem, mas não redirecionam.
+    // Com o número e o perfil confirmados, troque para true.
+    redirecionarContatos: false,
     email: 'web@dizassessoria.com.br',
     endereco: 'Av. Getúlio Vargas, 1410/204',
     bairro: 'Menino Deus',
@@ -47,7 +51,7 @@ window.DIZ = (function () {
       dormitorios: 1,
       banheiros: 1,
       vagas: 1,
-      area: 50, // a página de detalhe diz 50 m²; o cartão da home diz 43 — [a confirmar]
+      area: 50, // vale o que diz a página de detalhe do site atual (o cartão da home dizia 43)
       condominio: null, // [a confirmar]
       iptu: null,       // [a confirmar]
       endereco: null,   // rua e número [a confirmar]
@@ -141,6 +145,31 @@ window.DIZ = (function () {
     }
   ];
 
+  // ALUGUÉIS — FICTÍCIOS (exemplos para a prévia, a pedido do Kim).
+  IMOVEIS.push(
+    {
+      id: 'aluguel-menino-deus', codigo: null, finalidade: 'Aluguel', tipo: 'Apartamento',
+      bairro: 'Menino Deus', cidade: 'Porto Alegre',
+      preco: 2400, condominio: 520, iptu: null,
+      dormitorios: 2, banheiros: 1, vagas: 1, area: 68,
+      fotos: ['1493809842364-78817add7ffb', '1484154218962-a197022b5858', '1505691938895-1758d7feb511']
+    },
+    {
+      id: 'aluguel-cidade-baixa', codigo: null, finalidade: 'Aluguel', tipo: 'Apartamento',
+      bairro: 'Cidade Baixa', cidade: 'Porto Alegre',
+      preco: 1650, condominio: 380, iptu: null,
+      dormitorios: 1, banheiros: 1, vagas: null, area: 42,
+      fotos: ['1554995207-c18c203602cb', '1560448204-e02f11c3d0e2', '1502672260266-1c1ef2d93688']
+    },
+    {
+      id: 'aluguel-petropolis', codigo: null, finalidade: 'Aluguel', tipo: 'Apartamento',
+      bairro: 'Petrópolis', cidade: 'Porto Alegre',
+      preco: 3800, condominio: 890, iptu: null,
+      dormitorios: 3, banheiros: 2, vagas: 2, area: 112,
+      fotos: ['1600607687939-ce8a6c25118c', '1600566753190-17f0baa2a6c3', '1600210492486-724fe5c67fb0']
+    }
+  );
+
   var IMAGENS = {
     hero: '1600210492486-724fe5c67fb0',
     comprar: '1600585154340-be6161a56a0c',
@@ -155,8 +184,12 @@ window.DIZ = (function () {
   }
 
   // Preposição correta por bairro (em Porto Alegre se diz "na Azenha").
-  var NA = { 'Azenha': 'na' };
+  var NA = { 'Azenha': 'na', 'Cidade Baixa': 'na' };
   function noBairro(b) { return (NA[b] || 'no') + ' ' + b; }
+
+  function precoDe(im) {
+    return preco(im.preco) + (im.finalidade === 'Aluguel' ? '/mês' : '');
+  }
 
   function tituloDe(im) {
     if (im.titulo) return im.titulo;
@@ -166,6 +199,7 @@ window.DIZ = (function () {
   }
 
   function linkWhats(msg) {
+    if (!SITE.redirecionarContatos) return '#';
     var texto = encodeURIComponent(msg || 'Olá, vim pelo site da Diz e gostaria de atendimento.');
     // Sem número confirmado, o WhatsApp abre com a mensagem pronta para escolher o contato.
     return SITE.whatsapp
@@ -190,6 +224,7 @@ window.DIZ = (function () {
     foto: foto,
     preco: preco,
     tituloDe: tituloDe,
+    precoDe: precoDe,
     noBairro: noBairro,
     linkWhats: linkWhats,
     porId: porId

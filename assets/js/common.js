@@ -26,6 +26,7 @@
     search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>',
     shield: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="m9 12 2 2 4-4"/></svg>',
     lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+    insta: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></svg>',
     chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>'
   };
 
@@ -82,7 +83,7 @@
         '<div class="card__body">' +
           '<p class="card__place">' + esc(im.bairro) + ' · ' + esc(im.cidade) + '</p>' +
           '<h3 class="card__title">' + esc(D.tituloDe(im)) + '</h3>' +
-          '<p class="card__price">' + D.preco(im.preco) + '</p>' +
+          '<p class="card__price">' + D.precoDe(im) + '</p>' +
           '<div class="card__foot">' +
             (im.codigo ? '<span class="card__code">Cód. ' + esc(im.codigo) + '</span>' : '<span></span>') +
             '<span class="card__cta">Ver imóvel ' + ICON.arrow + '</span>' +
@@ -116,12 +117,29 @@
     });
   }
 
+  /* WhatsApp: com redirecionarContatos = false o botão aparece mas não sai da página. */
+  function ligarWhats(a, msg) {
+    var url = D.linkWhats(msg);
+    a.href = url;
+    if (url === '#') { a.setAttribute('data-noop', ''); a.removeAttribute('target'); }
+    else { a.removeAttribute('data-noop'); a.target = '_blank'; a.rel = 'noopener'; }
+  }
+
+  // Um único ouvinte: links "de demonstração" não navegam nem pulam para o topo.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-noop]');
+    if (a) e.preventDefault();
+  });
+
   function ligarContatos(root) {
     var S = D.SITE;
     Array.prototype.forEach.call((root || document).querySelectorAll('[data-whats]'), function (a) {
-      a.href = D.linkWhats(a.getAttribute('data-whats') || null);
-      a.target = '_blank';
-      a.rel = 'noopener';
+      ligarWhats(a, a.getAttribute('data-whats') || null);
+    });
+    Array.prototype.forEach.call((root || document).querySelectorAll('[data-insta]'), function (a) {
+      if (S.redirecionarContatos && S.instagram) {
+        a.href = S.instagram; a.target = '_blank'; a.rel = 'noopener';
+      } else { a.href = '#'; a.setAttribute('data-noop', ''); }
     });
     Array.prototype.forEach.call((root || document).querySelectorAll('[data-tel]'), function (a) {
       a.href = S.telefoneLink;
@@ -177,7 +195,7 @@
   }
 
   window.DIZUI = {
-    ICON: ICON, esc: esc, tbc: tbc, fatos: fatos, faixa: faixa, cartao: cartao,
+    ligarWhats: ligarWhats, ICON: ICON, esc: esc, tbc: tbc, fatos: fatos, faixa: faixa, cartao: cartao,
     carregarImagens: carregarImagens, preencherIcones: preencherIcones, ligarContatos: ligarContatos
   };
 

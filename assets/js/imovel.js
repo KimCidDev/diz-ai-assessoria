@@ -17,7 +17,7 @@
 
   function msgWhats() {
     var ref = im.codigo ? 'o imóvel ' + im.codigo : 'o imóvel ' + D.noBairro(im.bairro);
-    return 'Olá, tenho interesse n' + ref + ' (' + im.bairro + ', ' + D.preco(im.preco) + '). Pode me passar mais informações?';
+    return 'Olá, tenho interesse n' + ref + ' (' + im.bairro + ', ' + D.precoDe(im) + '). Pode me passar mais informações?';
   }
 
   function resumoAuto() {
@@ -37,7 +37,7 @@
       '<h1 class="detail__title">' + UI.esc(D.tituloDe(im)) + '</h1>' +
       '<p class="detail__place">' + UI.ICON.pin + UI.esc(im.bairro) + ', ' + UI.esc(im.cidade) + ' – RS</p>' +
       '<div class="detail__pricebar">' +
-        '<p class="detail__price">' + D.preco(im.preco) + '</p>' +
+        '<p class="detail__price">' + D.precoDe(im) + '</p>' +
         (im.codigo ? '<p class="detail__code">Código <strong>' + UI.esc(im.codigo) + '</strong></p>' : '') +
       '</div>' +
       UI.fatos(im, 'facts facts--big');
@@ -46,7 +46,7 @@
 
   function valores() {
     // Só mostra o que existe: condomínio e IPTU aparecem quando informados.
-    var linhas = [['Valor de ' + (im.finalidade === 'Aluguel' ? 'aluguel' : 'venda'), D.preco(im.preco)]];
+    var linhas = [['Valor de ' + (im.finalidade === 'Aluguel' ? 'aluguel' : 'venda'), D.precoDe(im)]];
     if (im.condominio != null) linhas.push(['Condomínio', D.preco(im.condominio)]);
     if (im.iptu != null) linhas.push(['IPTU', D.preco(im.iptu)]);
     (im.extras || []).forEach(function (e) { linhas.push(e); });
@@ -87,12 +87,9 @@
   }
 
   function contato() {
-    $('sidePrice').textContent = D.preco(im.preco);
+    $('sidePrice').textContent = D.precoDe(im);
     $('sideCode').textContent = im.codigo ? 'Código ' + im.codigo : im.bairro + ' · Porto Alegre';
-    [$('sideWhats'), $('stickyWhats')].forEach(function (a) {
-      a.href = D.linkWhats(msgWhats());
-      a.target = '_blank'; a.rel = 'noopener';
-    });
+    [$('sideWhats'), $('stickyWhats')].forEach(function (a) { UI.ligarWhats(a, msgWhats()); });
     $('mMsg').value = 'Olá, tenho interesse ' + (im.codigo ? 'no imóvel ' + im.codigo : 'neste imóvel') + '. Quando podemos conversar?';
     $('miniForm').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -183,7 +180,7 @@
     pintar();
 
     $('btnShare').addEventListener('click', function () {
-      var dados = { title: D.tituloDe(im), text: D.tituloDe(im) + ' — ' + D.preco(im.preco), url: window.location.href };
+      var dados = { title: D.tituloDe(im), text: D.tituloDe(im) + ' — ' + D.precoDe(im), url: window.location.href };
       if (navigator.share) { navigator.share(dados).catch(function () {}); return; }
       if (navigator.clipboard) {
         navigator.clipboard.writeText(dados.url).then(function () { toast('Link copiado'); }, function () { toast(dados.url); });

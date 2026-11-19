@@ -45,15 +45,40 @@
 
   /* Vitrine: um destaque + os demais, cada imóvel aparece uma vez só. */
   function vitrine() {
-    var destaque = D.IMOVEIS.filter(function (i) { return i.destaque; })[0];
-    var resto = D.IMOVEIS.filter(function (i) { return i !== destaque; });
+    var venda = D.IMOVEIS.filter(function (i) { return i.finalidade === 'Venda'; });
+    var aluguel = D.IMOVEIS.filter(function (i) { return i.finalidade === 'Aluguel'; });
+    var destaque = venda.filter(function (i) { return i.destaque; })[0];
+    var resto = venda.filter(function (i) { return i !== destaque; });
     if (destaque) $('featured').innerHTML = UI.cartao(destaque, { big: true });
     $('latest').innerHTML = resto.map(function (i) { return UI.cartao(i); }).join('');
+    $('rentals').innerHTML = aluguel.map(function (i) { return UI.cartao(i); }).join('');
+    $('alugueis').hidden = !aluguel.length;
     UI.carregarImagens($('vitrine'));
     UI.carregarImagens($('imoveis'));
+    UI.carregarImagens($('alugueis'));
+  }
+
+  // Faixas de preço diferentes para compra e para aluguel.
+  var FAIXAS = {
+    Venda: { min: [150000, 200000, 300000, 500000, 800000, 1000000], max: [200000, 300000, 500000, 800000, 1000000, 1500000] },
+    Aluguel: { min: [1000, 1500, 2000, 3000], max: [1500, 2000, 3000, 5000] }
+  };
+  function rotulo(v) {
+    if (v >= 1000000) return 'R$ ' + (v / 1000000).toLocaleString('pt-BR') + ' milhão';
+    if (v >= 10000) return 'R$ ' + (v / 1000) + ' mil';
+    return 'R$ ' + v.toLocaleString('pt-BR') + '/mês';
+  }
+  function opcoesDePreco(f) {
+    [['fMin', 'min', 'Sem mínimo'], ['fMax', 'max', 'Sem máximo']].forEach(function (c) {
+      var sel = $(c[0]);
+      sel.innerHTML = '<option value="">' + c[2] + '</option>' + FAIXAS[f][c[1]].map(function (v) {
+        return '<option value="' + v + '">' + rotulo(v) + '</option>';
+      }).join('');
+    });
   }
 
   function setFinalidade(f) {
+    if (estado.finalidade !== f) opcoesDePreco(f);
     estado.finalidade = f;
     $('fFinalidade').value = f;
     Array.prototype.forEach.call(document.querySelectorAll('.search__tab'), function (t) {
@@ -119,6 +144,7 @@
     $('resultados').hidden = false;
     $('vitrine').hidden = true;
     $('imoveis').hidden = true;
+    $('alugueis').hidden = true;
     $('resultsTitle').textContent = lista.length === 0 ? 'Nenhum imóvel encontrado'
       : lista.length === 1 ? '1 imóvel encontrado' : lista.length + ' imóveis encontrados';
     $('resultsSummary').textContent = cod ? 'Código "' + cod.toUpperCase() + '"' : resumo();
@@ -131,6 +157,7 @@
   function limpar() {
     $('searchForm').reset();
     setFinalidade('Venda');
+    opcoesDePreco('Venda');
     estado.dorm = ''; estado.vagas = '';
     Array.prototype.forEach.call(document.querySelectorAll('.chips'), function (g) {
       Array.prototype.forEach.call(g.querySelectorAll('.chip'), function (c, idx) {
@@ -140,6 +167,7 @@
     $('resultados').hidden = true;
     $('vitrine').hidden = false;
     $('imoveis').hidden = false;
+    $('alugueis').hidden = false;
     $('busca').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -150,8 +178,13 @@
     Array.prototype.forEach.call(document.querySelectorAll('.search__tab'), function (t) {
       t.addEventListener('click', function () { setFinalidade(t.getAttribute('data-finalidade')); refazer(); });
     });
+    // Comprar / Alugar no menu, nos blocos e nos links: já mostram a lista certa.
     Array.prototype.forEach.call(document.querySelectorAll('.js-tab-link'), function (a) {
-      a.addEventListener('click', function () { setFinalidade(a.getAttribute('data-finalidade') || 'Venda'); refazer(); });
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        setFinalidade(a.getAttribute('data-finalidade') || 'Venda');
+        buscar();
+      });
     });
     $('searchForm').addEventListener('submit', buscar);
     $('clearSearch').addEventListener('click', limpar);
