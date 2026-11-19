@@ -47,7 +47,7 @@ window.DIZ = (function () {
       dormitorios: 1,
       banheiros: 1,
       vagas: 1,
-      area: 50,
+      area: 50, // a página de detalhe diz 50 m²; o cartão da home diz 43 — [a confirmar]
       condominio: null, // [a confirmar]
       iptu: null,       // [a confirmar]
       endereco: null,   // rua e número [a confirmar]
@@ -82,7 +82,8 @@ window.DIZ = (function () {
       bairro: 'Azenha',
       cidade: 'Porto Alegre',
       preco: 220000,
-      dormitorios: null, banheiros: null, vagas: null, area: null,
+      // Cartão do site atual: 2 dorm., 1 banh.; vagas e área vazias -> escondidas.
+      dormitorios: 2, banheiros: 1, vagas: null, area: null,
       fotos: ['1600566753190-17f0baa2a6c3', '1586023492125-27b2c045efd7']
     },
     {
@@ -130,7 +131,8 @@ window.DIZ = (function () {
       bairro: 'Menino Deus',
       cidade: 'Porto Alegre',
       preco: 1200000,
-      dormitorios: null, banheiros: null, vagas: null, area: null,
+      // Cartão do site atual: 4 dorm., 5+ banh., 4 vagas, 340 m².
+      dormitorios: 4, banheiros: 5, banheirosMais: true, vagas: 4, area: 340,
       fotos: ['1512917774080-9991f1c4c750', '1600585154340-be6161a56a0c']
     }
   ];

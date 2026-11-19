@@ -111,6 +111,8 @@
     track.innerHTML = fotos.map(function (f, i) {
       return '<figure class="gallery__slide"><img data-src="' + D.foto(f, 1400) + '" alt="Foto ' + (i + 1) + ' de ' + fotos.length + ' — ' + UI.esc(D.tituloDe(im)) + '"></figure>';
     }).join('');
+    // Faixa com as características sobre a foto, igual aos cartões.
+    track.insertAdjacentHTML('afterend', UI.faixa(im));
     UI.carregarImagens(track);
     // A primeira foto carrega já, sem esperar o lazy-load.
     var first = track.querySelector('img');

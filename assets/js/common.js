@@ -44,13 +44,28 @@
   function fatos(im, cls) {
     var f = [];
     if (im.dormitorios != null) f.push([ICON.bed, im.dormitorios + (im.dormitorios === 1 ? ' dorm.' : ' dorms.')]);
-    if (im.banheiros != null) f.push([ICON.bath, im.banheiros + (im.banheiros === 1 ? ' banh.' : ' banhs.')]);
+    if (im.banheiros != null) f.push([ICON.bath, im.banheiros + (im.banheirosMais ? '+' : '') + (im.banheiros === 1 && !im.banheirosMais ? ' banh.' : ' banhs.')]);
     if (im.vagas != null) f.push([ICON.car, im.vagas + (im.vagas === 1 ? ' vaga' : ' vagas')]);
     if (im.area != null) f.push([ICON.area, im.area + ' m²']);
     if (!f.length) return '';
     return '<ul class="' + (cls || 'facts') + '">' + f.map(function (x) {
       return '<li>' + x[0] + '<span>' + x[1] + '</span></li>';
     }).join('') + '</ul>';
+  }
+
+  /* Faixa sobre a foto: gradiente suave + ícones das características principais.
+     Só aparece quando há pelo menos um dado; nada de "-". */
+  function faixa(im) {
+    var f = [];
+    function n(v, mais) { return v + (mais ? '+' : ''); }
+    if (im.dormitorios != null) f.push([ICON.bed, n(im.dormitorios), im.dormitorios === 1 ? 'dormitório' : 'dormitórios']);
+    if (im.banheiros != null) f.push([ICON.bath, n(im.banheiros, im.banheirosMais), im.banheiros === 1 && !im.banheirosMais ? 'banheiro' : 'banheiros']);
+    if (im.vagas != null) f.push([ICON.car, n(im.vagas), im.vagas === 1 ? 'vaga' : 'vagas']);
+    if (im.area != null) f.push([ICON.area, im.area + ' m²', 'de área']);
+    if (!f.length) return '';
+    return '<div class="ov"><ul class="ov__facts">' + f.map(function (x) {
+      return '<li>' + x[0] + '<span>' + x[1] + '</span><span class="sr-only"> ' + x[2] + '</span></li>';
+    }).join('') + '</ul></div>';
   }
 
   function cartao(im, opts) {
@@ -63,13 +78,12 @@
       '<a class="card' + (opts.big ? ' card--big' : '') + '" href="imovel.html?id=' + encodeURIComponent(im.id) + '">' +
         '<div class="card__media">' +
           (foto ? '<img data-src="' + D.foto(foto, opts.big ? 1400 : 800) + '" alt="' + esc(D.tituloDe(im)) + '">' : '') +
-          badge + count +
+          badge + count + faixa(im) +
         '</div>' +
         '<div class="card__body">' +
           '<p class="card__place">' + esc(im.bairro) + ' · ' + esc(im.cidade) + '</p>' +
           '<h3 class="card__title">' + esc(D.tituloDe(im)) + '</h3>' +
           '<p class="card__price">' + D.preco(im.preco) + '</p>' +
-          fatos(im, 'facts facts--card') +
           '<div class="card__foot">' +
             (im.codigo ? '<span class="card__code">Cód. ' + esc(im.codigo) + '</span>' : '<span></span>') +
             '<span class="card__cta">Ver imóvel ' + ICON.arrow + '</span>' +
@@ -161,7 +175,7 @@
   }
 
   window.DIZUI = {
-    ICON: ICON, esc: esc, tbc: tbc, fatos: fatos, cartao: cartao,
+    ICON: ICON, esc: esc, tbc: tbc, fatos: fatos, faixa: faixa, cartao: cartao,
     carregarImagens: carregarImagens, preencherIcones: preencherIcones, ligarContatos: ligarContatos
   };
 
