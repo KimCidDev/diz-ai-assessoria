@@ -94,7 +94,8 @@ window.DIZ = (function () {
       bairro: 'Jardim Botânico',
       cidade: 'Porto Alegre',
       preco: 265000,
-      dormitorios: null, banheiros: null, vagas: null, area: null,
+      // FICTÍCIO (exemplo para a prévia, a pedido do Kim) — substituir pelos dados reais.
+      dormitorios: 2, banheiros: 1, vagas: 1, area: 62,
       fotos: ['1586023492125-27b2c045efd7', '1600566753190-17f0baa2a6c3']
     },
     {
@@ -105,7 +106,8 @@ window.DIZ = (function () {
       bairro: 'Menino Deus',
       cidade: 'Porto Alegre',
       preco: 590000,
-      dormitorios: null, banheiros: null, vagas: null, area: null,
+      // FICTÍCIO (exemplo para a prévia, a pedido do Kim) — substituir pelos dados reais.
+      dormitorios: 3, banheiros: 2, vagas: 1, area: 98,
       fotos: ['1600607687939-ce8a6c25118c', '1600210492486-724fe5c67fb0']
     },
     {
@@ -119,7 +121,8 @@ window.DIZ = (function () {
       bairro: 'Menino Deus',
       cidade: 'Porto Alegre',
       preco: 980000,
-      dormitorios: null, banheiros: null, vagas: null, area: null,
+      // FICTÍCIO (exemplo para a prévia, a pedido do Kim) — substituir pelos dados reais.
+      dormitorios: 3, banheiros: 3, vagas: 2, area: 156,
       fotos: ['1600596542815-ffad4c1539a9', '1600585154340-be6161a56a0c']
     },
     {

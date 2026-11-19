@@ -54,7 +54,7 @@
   }
 
   /* Faixa sobre a foto: gradiente suave + ícones das características principais.
-     Só aparece quando há pelo menos um dado; nada de "-". */
+     Aparece em todos os cartões; mostra só os dados que existem — nada de "-". */
   function faixa(im) {
     var f = [];
     function n(v, mais) { return v + (mais ? '+' : ''); }
@@ -62,7 +62,8 @@
     if (im.banheiros != null) f.push([ICON.bath, n(im.banheiros, im.banheirosMais), im.banheiros === 1 && !im.banheirosMais ? 'banheiro' : 'banheiros']);
     if (im.vagas != null) f.push([ICON.car, n(im.vagas), im.vagas === 1 ? 'vaga' : 'vagas']);
     if (im.area != null) f.push([ICON.area, im.area + ' m²', 'de área']);
-    if (!f.length) return '';
+    // Sem nenhum dado confirmado: a faixa continua, com o bairro — nunca números inventados.
+    if (!f.length) f.push([ICON.pin, im.bairro, '']);
     return '<div class="ov"><ul class="ov__facts">' + f.map(function (x) {
       return '<li>' + x[0] + '<span>' + x[1] + '</span><span class="sr-only"> ' + x[2] + '</span></li>';
     }).join('') + '</ul></div>';
